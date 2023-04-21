@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+     return check(root,root);   
+    }
+    bool check(TreeNode* p,TreeNode* q){
+        if(p==nullptr&&q==nullptr) return true;
+        if(p==nullptr||q==nullptr) return false;
+        return p->val==q->val && check(p->left,q->right) && check(p->right,q->left);
+    }
+};
+
+思路就是递归，创建一个bool型的check 然后 pq 都为空就是真，如果一个为空就是假，接着返回当前值的比较结果&&左节点等于右节点 符合镜像条件。
+主函数直接check（root，root）就可以得到结果。
+
+注意几点：
+空指针为 nullptr
+比较时候需要双等于号
+布尔型函数的创建 用bool
+树指针见好几次了，TreeNode* A
