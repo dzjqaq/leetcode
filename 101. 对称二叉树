@@ -1,16 +1,30 @@
+// 定义一个Solution类
 class Solution {
 public:
-    bool isSymmetric(TreeNode* root) {
-     return check(root,root);   
-    }
-    bool check(TreeNode* p,TreeNode* q){
-        if(p==nullptr&&q==nullptr) return true;
-        if(p==nullptr||q==nullptr) return false;
-        return p->val==q->val && check(p->left,q->right) && check(p->right,q->left);
-    }
+// 定义一个判断是否对称的函数，入参为二叉树的根节点，返回值为bool类型
+bool isSymmetric(TreeNode* root) {
+// 调用check函数，传入根节点的左右子树，判断左右子树是否对称
+return check(root, root);
+}
+// 定义一个判断两棵树是否对称的函数，入参为两个二叉树的根节点，返回值为bool类型
+bool check(TreeNode* p, TreeNode* q){
+    // 如果两棵树都为空，则返回true
+    if (p == nullptr && q == nullptr) return true;
+    // 如果两棵树只有一棵为空，则返回false
+    if (p == nullptr || q == nullptr) return false;
+    // 如果两棵树的根节点值不相等，则返回false
+    if (p->val != q->val) return false;
+    // 判断p的左子树和q的右子树是否对称，同时判断p的右子树和q的左子树是否对称
+    return check(p->left, q->right) && check(p->right, q->left);
+}
 };
 
-思路就是递归，创建一个bool型的check 然后 pq 都为空就是真，如果一个为空就是假，接着返回当前值的比较结果&&左节点等于右节点 符合镜像条件。
+
+思路就是递归，创建一个bool型的check 然后 pq 都为空就是真，如果一个为空就是假，接着返回当前值的比较结果&&判断p的左子树和q的右子树是否对称，同时判断p的右子树和q的左子树是否对称，
+核心的原理思想：
+如果同时满足下面的条件，两个树互为镜像：
+    它们的两个根结点具有相同的值
+    每个树的右子树都与另一个树的左子树镜像对称
 主函数直接check（root，root）就可以得到结果。
 
 注意几点：
